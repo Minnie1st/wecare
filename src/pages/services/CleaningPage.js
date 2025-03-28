@@ -126,12 +126,13 @@ const Label = styled.label`
   font-weight: 500;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-`;
+// Removing the unused Input styled component
+// const Input = styled.input`
+//   width: 100%;
+//   padding: 10px;
+//   border: 1px solid #ddd;
+//   border-radius: 4px;
+// `;
 
 const Select = styled.select`
   width: 100%;
