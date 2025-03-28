@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import './i18n';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -10,6 +11,13 @@ import ElderCarePage from './pages/services/ElderCarePage';
 import ChildCarePage from './pages/services/ChildCarePage';
 import PlumbingPage from './pages/services/PlumbingPage';
 import BookingPage from './pages/BookingPage';
+import ProviderPortalPage from './pages/provider/ProviderPortalPage';
+import ServiceProviderPage from './pages/provider/ServiceProviderPage';
+import ServiceRequestPage from './pages/ServiceRequestPage';
+
+// Auth Components
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 // Components
 import Header from './components/layout/Header';
@@ -38,6 +46,11 @@ function App() {
           <Route path="/services/elder-care" element={<ElderCarePage />} />
           <Route path="/services/child-care" element={<ChildCarePage />} />
           <Route path="/booking" element={<BookingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/provider/portal" element={<ProviderPortalPage />} />
+          <Route path="/provider/service" element={<ServiceProviderPage />} />
+          <Route path="/service-request" element={<ServiceRequestPage />} />
         </Routes>
       </MainContent>
       <Footer />

@@ -9,11 +9,12 @@ const PageContainer = styled.div`
 
 const PageHeader = styled.div`
   background-color: var(--elder-care-color);
-  color: white;
+  color: var(--text-light);
   padding: 40px 0;
   text-align: center;
   border-radius: 8px;
   margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const PageTitle = styled.h1`
@@ -47,7 +48,9 @@ const SectionTitle = styled.h2`
 `;
 
 const AssessmentForm = styled.div`
-  background: white;
+  background: var(--text-light);
+  color: var(--text-dark);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   padding: var(--card-padding);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -123,7 +126,7 @@ const Checkbox = styled.input`
 
 const SubmitButton = styled.button`
   background-color: var(--elder-care-color);
-  color: white;
+  color: var(--text-light);
   padding: 12px 24px;
   border: none;
   border-radius: 4px;
@@ -132,7 +135,7 @@ const SubmitButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: #7b10d5;
+    background-color: var(--text-secondary);
   }
 `;
 
@@ -151,14 +154,16 @@ const CaregiverGrid = styled.div`
 `;
 
 const CaregiverCard = styled.div`
-  background: #f9f9f9;
+  background: var(--text-light);
   border-radius: 8px;
   padding: 15px;
   transition: all 0.3s ease;
+  color: var(--text-dark);
   
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: rgba(46, 125, 50, 0.05);
   }
 `;
 

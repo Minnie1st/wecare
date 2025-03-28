@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const PageContainer = styled.div`
   max-width: 1200px;
@@ -219,7 +220,8 @@ const AuthorRole = styled.div`
   color: var(--text-secondary);
 `;
 
-function HomePage() {
+const HomePage = () => {
+  const { t } = useTranslation();
   const serviceCategories = [
     { id: 'cleaning', name: 'Cleaning', icon: '🧹', color: 'var(--cleaning-color)', path: '/services/cleaning' },
     { id: 'repair', name: 'Repair', icon: '🔧', color: 'var(--repair-color)', path: '/services/repair' },
@@ -256,11 +258,14 @@ function HomePage() {
   return (
     <PageContainer>
       <HeroSection>
-        <HeroTitle>Your Trusted Service Platform</HeroTitle>
+        <HeroTitle>{t('home.hero.title')}</HeroTitle>
         <HeroDescription>
-          Find reliable professionals for all your home service needs - cleaning, repair, care, and more.
+          {t('home.hero.subtitle')}
         </HeroDescription>
-        <HeroButton to="/booking">Book a Service</HeroButton>
+        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
+          <HeroButton to="/service-request">{t('home.hero.postRequest')}</HeroButton>
+          <HeroButton to="/provider/service" style={{ background: 'transparent', border: '2px solid white', color: 'white' }}>{t('home.hero.provideService')}</HeroButton>
+        </div>
       </HeroSection>
       
       <SectionTitle>Our Services</SectionTitle>

@@ -1,19 +1,20 @@
 /* Global CSS Variables */
 :root {
   /* Primary Colors */
-  --primary-color: #4A90E2;
+  --primary-color: #2E7D32;
   
   /* Secondary Colors */
-  --cleaning-color: #67B8E3;
-  --repair-color: #F5A623;
-  --plumbing-color: #50E3C2;
-  --elder-care-color: #9013FE;
-  --child-care-color: #F8E71C;
+  --cleaning-color: #4CAF50;
+  --repair-color: #8BC34A;
+  --plumbing-color: #009688;
+  --elder-care-color: #43A047;
+  --child-care-color: #66BB6A;
   
   /* Text Colors */
-  --text-primary: #333333;
-  --text-secondary: #666666;
+  --text-primary: #1B5E20;
+  --text-secondary: #2E7D32;
   --text-light: #FFFFFF;
+  --text-dark: #1B5E20;
   
   /* Spacing */
   --page-margin: 24px;
@@ -69,6 +70,12 @@ button {
   padding: 10px 16px;
   font-size: var(--body-text);
   transition: all 0.3s ease;
+  background-color: var(--text-light);
+  color: var(--text-dark);
+}
+
+button:hover {
+  background-color: rgba(46, 125, 50, 0.1);
 }
 
 .container {

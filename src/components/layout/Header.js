@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import LanguageSwitcher from '../LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 const HeaderContainer = styled.header`
   background-color: white;
@@ -27,6 +29,7 @@ const Logo = styled(Link)`
 const Navigation = styled.nav`
   display: flex;
   gap: 20px;
+  align-items: center;
 `;
 
 const NavLink = styled(Link)`
@@ -34,25 +37,67 @@ const NavLink = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 4px;
   
   &:hover {
     color: var(--primary-color);
+    background-color: rgba(46, 125, 50, 0.1);
+  }
+`;
+
+const AuthButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+`;
+
+const AuthButton = styled(Link)`
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  &.login {
+    color: var(--text-dark);
+    border: 1px solid var(--text-dark);
+    
+    &:hover {
+      background-color: rgba(46, 125, 50, 0.1);
+    }
+  }
+  
+  &.register {
+    color: var(--text-light);
+    background-color: var(--primary-color);
+    
+    &:hover {
+      background-color: var(--text-secondary);
+    }
   }
 `;
 
 function Header() {
+  const { t } = useTranslation();
+
   return (
     <HeaderContainer>
       <HeaderContent>
         <Logo to="/">WeCare</Logo>
         <Navigation>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/services/cleaning">Cleaning</NavLink>
-          <NavLink to="/services/repair">Repair</NavLink>
-          <NavLink to="/services/plumbing">Plumbing</NavLink>
-          <NavLink to="/services/elder-care">Elder Care</NavLink>
-          <NavLink to="/services/child-care">Child Care</NavLink>
-          <NavLink to="/booking">Book Now</NavLink>
+          <NavLink to="/">{t('nav.home')}</NavLink>
+          <NavLink to="/services/cleaning">{t('nav.cleaning')}</NavLink>
+          <NavLink to="/services/repair">{t('nav.repair')}</NavLink>
+          <NavLink to="/services/plumbing">{t('nav.plumbing')}</NavLink>
+          <NavLink to="/services/elder-care">{t('nav.elderCare')}</NavLink>
+          <NavLink to="/services/child-care">{t('nav.childCare')}</NavLink>
+          <NavLink to="/booking">{t('nav.bookNow')}</NavLink>
+          <LanguageSwitcher />
+          <AuthButtons>
+            <AuthButton to="/login" className="login">{t('nav.login')}</AuthButton>
+            <AuthButton to="/register" className="register">{t('nav.register')}</AuthButton>
+          </AuthButtons>
         </Navigation>
       </HeaderContent>
     </HeaderContainer>
