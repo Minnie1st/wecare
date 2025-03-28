@@ -1,0 +1,206 @@
+function CleaningPage() {
+  const [activeCategory, setActiveCategory] = useState('regular');
+  const [price, setPrice] = useState(null);
+  
+  const categories = [
+    { id: 'regular', name: 'Regular Cleaning' },
+    { id: 'deep', name: 'Deep Cleaning' },
+    { id: 'window', name: 'Window Cleaning' },
+    { id: 'post-construction', name: 'Post-construction Cleaning' },
+    { id: 'office', name: 'Office Cleaning' },
+  ];
+  
+  const calculatePrice = (e) => {
+    e.preventDefault();
+    // Simple price calculation logic (would be more complex in a real app)
+    const basePrice = activeCategory === 'regular' ? 25 : 
+                     activeCategory === 'deep' ? 40 : 
+                     activeCategory === 'window' ? 30 : 
+                     activeCategory === 'post-construction' ? 50 : 35;
+    
+    setPrice(basePrice);
+  };
+  
+  const getChecklistItems = () => {
+    switch(activeCategory) {
+      case 'regular':
+        return [
+          'Dusting all accessible surfaces',
+          'Vacuuming carpets and floors',
+          'Mopping hard floors',
+          'Cleaning kitchen surfaces',
+          'Cleaning bathroom fixtures',
+          'Taking out trash'
+        ];
+      case 'deep':
+        return [
+          'All regular cleaning tasks',
+          'Inside oven cleaning',
+          'Inside refrigerator cleaning',
+          'Interior window cleaning',
+          'Baseboards and door frames',
+          'Cabinet fronts cleaning',
+          'Light fixture cleaning'
+        ];
+      case 'window':
+        return [
+          'Interior window cleaning',
+          'Exterior window cleaning',
+          'Window sill cleaning',
+          'Window track cleaning',
+          'Screen cleaning',
+          'Window frame cleaning'
+        ];
+      case 'post-construction':
+        return [
+          'Dust removal from all surfaces',
+          'Debris removal',
+          'Detailed cleaning of all rooms',
+          'Floor cleaning and polishing',
+          'Paint spot removal',
+          'Fixture cleaning',
+          'Final inspection'
+        ];
+      case 'office':
+        return [
+          'Desk and workspace cleaning',
+          'Common area cleaning',
+          'Restroom sanitization',
+          'Kitchen/break room cleaning',
+          'Trash removal',
+          'Floor cleaning',
+          'Glass partition cleaning'
+        ];
+      default:
+        return [];
+    }
+  };
+  
+  return (
+    <PageContainer>
+      <PageHeader>
+        <PageTitle>Cleaning Services</PageTitle>
+        <PageDescription>
+          Professional cleaning services tailored to your needs. Choose from our range of cleaning options.
+        </PageDescription>
+      </PageHeader>
+      
+      <CategoryTabs>
+        {categories.map(category => (
+          <CategoryTab 
+            key={category.id}
+            active={activeCategory === category.id}
+            onClick={() => setActiveCategory(category.id)}
+          >
+            {category.name}
+          </CategoryTab>
+        ))}
+      </CategoryTabs>
+      
+      <ServiceContent>
+        <ServiceDescription>
+          <h2>{categories.find(c => c.id === activeCategory).name}</h2>
+          <p>
+            {activeCategory === 'regular' && 'Our regular cleaning service covers all the basics to keep your home clean and tidy on a regular basis.'}
+            {activeCategory === 'deep' && 'Deep cleaning service tackles the areas that need extra attention, getting to the grime that regular cleaning doesn\'t reach.'}
+            {activeCategory === 'window' && 'Our window cleaning service leaves your windows spotless and streak-free, inside and out.'}
+            {activeCategory === 'post-construction' && 'After construction or renovation, our specialized cleaning removes all dust, debris, and construction residue.'}
+            {activeCategory === 'office' && 'Keep your workplace clean and professional with our office cleaning services tailored for businesses.'}
+          </p>
+        </ServiceDescription>
+        
+        <ServiceFeatures>
+          <FeatureCard>
+            <FeatureTitle>Service Scope</FeatureTitle>
+            <p>
+              {activeCategory === 'regular' && 'Covers all living areas including kitchen, bathrooms, bedrooms, and living spaces.'}
+              {activeCategory === 'deep' && 'Comprehensive cleaning of all areas with special attention to neglected spaces and built-up grime.'}
+              {activeCategory === 'window' && 'All accessible windows in your property, including frames, sills, and screens.'}
+              {activeCategory === 'post-construction' && 'Entire property affected by construction or renovation work.'}
+              {activeCategory === 'office' && 'Reception areas, workstations, meeting rooms, kitchens, and restrooms.'}
+            </p>
+          </FeatureCard>
+          
+          <FeatureCard>
+            <FeatureTitle>Time Estimation</FeatureTitle>
+            <p>
+              {activeCategory === 'regular' && 'Approximately 2-3 hours for an average-sized home.'}
+              {activeCategory === 'deep' && 'Approximately 4-6 hours depending on the size and condition of your home.'}
+              {activeCategory === 'window' && 'Approximately 2-4 hours depending on the number and size of windows.'}
+              {activeCategory === 'post-construction' && 'Approximately 6-8 hours or more depending on the scope of construction.'}
+              {activeCategory === 'office' && 'Varies based on office size, typically 2-4 hours for small to medium offices.'}
+            </p>
+          </FeatureCard>
+        </ServiceFeatures>
+        
+        <PriceCalculator>
+          <CalculatorTitle>Price Calculator</CalculatorTitle>
+          <CalculatorForm onSubmit={calculatePrice}>
+            <FormGroup>
+              <Label>Property Size</Label>
+              <Select>
+                <option value="small">Small (up to 50 m²)</option>
+                <option value="medium">Medium (51-100 m²)</option>
+                <option value="large">Large (101-150 m²)</option>
+                <option value="xlarge">Extra Large (151+ m²)</option>
+              </Select>
+            </FormGroup>
+            
+            <FormGroup>
+              <Label>Frequency</Label>
+              <Select>
+                <option value="once">One-time service</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Bi-weekly</option>
+                <option value="monthly">Monthly</option>
+              </Select>
+            </FormGroup>
+            
+            <FormGroup>
+              <Label>Number of Bedrooms</Label>
+              <Select>
+                <option value="1">1 Bedroom</option>
+                <option value="2">2 Bedrooms</option>
+                <option value="3">3 Bedrooms</option>
+                <option value="4">4+ Bedrooms</option>
+              </Select>
+            </FormGroup>
+            
+            <FormGroup>
+              <Label>Number of Bathrooms</Label>
+              <Select>
+                <option value="1">1 Bathroom</option>
+                <option value="2">2 Bathrooms</option>
+                <option value="3">3 Bathrooms</option>
+                <option value="4">4+ Bathrooms</option>
+              </Select>
+            </FormGroup>
+            
+            <CalculateButton type="submit">Calculate Price</CalculateButton>
+          </CalculatorForm>
+          
+          {price && (
+            <PriceResult>
+              Estimated price: €{price} per hour
+            </PriceResult>
+          )}
+        </PriceCalculator>
+        
+        <CleaningChecklist>
+          <ChecklistTitle>Cleaning Checklist</ChecklistTitle>
+          <ChecklistItems>
+            {getChecklistItems().map((item, index) => (
+              <ChecklistItem key={index}>
+                <CheckIcon>✓</CheckIcon> {item}
+              </ChecklistItem>
+            ))}
+          </ChecklistItems>
+        </CleaningChecklist>
+        
+        <BookButton>Book Now</BookButton>
+      </ServiceContent>
+    </PageContainer>
+  );
+}
+
+export default CleaningPage;
