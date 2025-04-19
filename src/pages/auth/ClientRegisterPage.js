@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -49,21 +49,7 @@ const Input = styled.input`
   }
 `;
 
-const SubmitButton = styled.button`
-  background-color: var(--primary-color);
-  color: var(--text-light);
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background-color: #3a7bc8;
-  }
-`;
+
 
 const AuthSwitch = styled.div`
   text-align: center;

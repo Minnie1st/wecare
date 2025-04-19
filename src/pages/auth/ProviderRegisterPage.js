@@ -51,21 +51,7 @@ const Input = styled.input`
   }
 `;
 
-const SubmitButton = styled.button`
-  background-color: var(--provider-color, #4caf50);
-  color: var(--text-light);
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background-color: #3d8b3d;
-  }
-`;
+
 
 const AuthSwitch = styled.div`
   text-align: center;

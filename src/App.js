@@ -18,13 +18,11 @@ import ClientDashboardPage from './pages/client/ClientDashboardPage';
 
 // Auth Components
 import UnifiedLogin from './components/auth/UnifiedLogin';
-import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import ClientLoginPage from './pages/auth/ClientLoginPage';
 import ClientRegisterPage from './pages/auth/ClientRegisterPage';
 import ProviderLoginPage from './pages/auth/ProviderLoginPage';
 import ProviderRegisterPage from './pages/auth/ProviderRegisterPage';
-import RegisterPage from './pages/auth/RegisterPage';
 
 // Components
 import Header from './components/layout/Header';

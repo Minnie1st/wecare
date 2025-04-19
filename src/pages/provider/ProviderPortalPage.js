@@ -193,11 +193,7 @@ const ActionButton = styled.button`
   }
 `;
 
-const AddServiceButton = styled.button`
-  background-color: #3498db;
-  color: white;
-  padding: 10px 20px;
-  border: none;
+
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
