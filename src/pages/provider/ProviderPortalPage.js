@@ -169,10 +169,7 @@ const ServiceActions = styled.div`
 const ActionButton = styled.button`
   padding: 8px 12px;
   border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
+
   
   &.edit {
     background-color: #f0f0f0;
@@ -194,10 +191,7 @@ const ActionButton = styled.button`
 `;
 
 
-  border-radius: 4px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
+
   display: flex;
   align-items: center;
   gap: 8px;
