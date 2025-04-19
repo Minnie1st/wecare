@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 const UploaderContainer = styled.div`
   margin-bottom: 20px;
@@ -79,14 +80,18 @@ const RemoveButton = styled.button`
   }
 `;
 
-function ImageUploader({ onChange, maxImages = 5, label = "上传图片" }) {
+function ImageUploader({ onChange, maxImages = 5, label }) {
+  const { t } = useTranslation();
   const [images, setImages] = useState([]);
+  
+  // 如果没有提供label，则使用默认的翻译
+  const imageLabel = label || t('imageUploader.uploadImage');
   
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     
     if (images.length + files.length > maxImages) {
-      alert(`最多只能上传${maxImages}张图片`);
+      alert(t('imageUploader.maxImagesError', { maxImages }));
       return;
     }
     
@@ -116,7 +121,7 @@ function ImageUploader({ onChange, maxImages = 5, label = "上传图片" }) {
   
   return (
     <UploaderContainer>
-      <UploadLabel>{label}</UploadLabel>
+      <UploadLabel>{imageLabel}</UploadLabel>
       <UploadArea>
         <UploadInput 
           type="file" 
@@ -125,14 +130,14 @@ function ImageUploader({ onChange, maxImages = 5, label = "上传图片" }) {
           multiple 
           onChange={handleImageChange} 
         />
-        <UploadText>点击或拖拽图片到此处上传 (最多{maxImages}张)</UploadText>
+        <UploadText>{t('imageUploader.uploadText', { maxImages })}</UploadText>
       </UploadArea>
       
       {images.length > 0 && (
         <ImagePreviewContainer>
           {images.map((image, index) => (
             <ImagePreview key={index}>
-              <PreviewImage src={image.preview} alt={`预览图 ${index + 1}`} />
+              <PreviewImage src={image.preview} alt={t('imageUploader.previewAlt', { index: index + 1 })} />
               <RemoveButton onClick={() => removeImage(index)}>×</RemoveButton>
             </ImagePreview>
           ))}

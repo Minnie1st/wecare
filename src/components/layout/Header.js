@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import LanguageSwitcher from '../LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 const HeaderContainer = styled.header`
   background-color: white;
@@ -50,6 +50,7 @@ const AuthButtons = styled.div`
   display: flex;
   gap: 10px;
   margin-left: 20px;
+  position: relative;
 `;
 
 const AuthButton = styled(Link)`
@@ -58,6 +59,8 @@ const AuthButton = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
   
   &.login {
     color: var(--text-dark);
@@ -80,6 +83,17 @@ const AuthButton = styled(Link)`
 
 function Header() {
   const { t } = useTranslation();
+  const [showDropdown, setShowDropdown] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showDropdown && !event.target.closest('.login')) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showDropdown]);
 
   return (
     <HeaderContainer>
@@ -95,8 +109,50 @@ function Header() {
           <NavLink to="/booking">{t('nav.bookNow')}</NavLink>
           <LanguageSwitcher />
           <AuthButtons>
-            <AuthButton to="/login" className="login">{t('nav.login')}</AuthButton>
-            <AuthButton to="/register" className="register">{t('nav.register')}</AuthButton>
+            <div style={{ marginRight: '10px', position: 'relative' }}>
+              <AuthButton as="div" className="login" style={{ cursor: 'pointer' }} onClick={() => setShowDropdown(!showDropdown)}>
+                {t('nav.login')}
+              </AuthButton>
+              {showDropdown && (
+                <div style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  background: 'white',
+                  borderRadius: '4px',
+                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+                  padding: '8px 0',
+                  zIndex: 1000,
+                  minWidth: '150px'
+                }}>
+                  <Link to="/client/login" style={{
+                    display: 'block',
+                    padding: '8px 16px',
+                    color: 'var(--text-dark)',
+                    textDecoration: 'none',
+                    transition: 'background-color 0.3s'
+                  }} onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(46, 125, 50, 0.1)'}
+                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>
+                    {t('I am Client')}
+                  </Link>
+                  <Link to="/provider/login" style={{
+                    display: 'block',
+                    padding: '8px 16px',
+                    color: 'var(--text-dark)',
+                    textDecoration: 'none',
+                    transition: 'background-color 0.3s'
+                  }} onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(46, 125, 50, 0.1)'}
+                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>
+                    {t('I am Provider')}
+                  </Link>
+                </div>
+              )}
+            </div>
+            <div>
+              <AuthButton to="/register" className="register">
+                {t('nav.register')}
+              </AuthButton>
+            </div>
           </AuthButtons>
         </Navigation>
       </HeaderContent>

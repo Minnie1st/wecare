@@ -9,7 +9,7 @@ const PageContainer = styled.div`
 `;
 
 const PageHeader = styled.div`
-  background-color: var(--primary-color);
+  background-color: #3498db;
   color: white;
   padding: 40px 0;
   text-align: center;
@@ -70,7 +70,7 @@ const MenuLink = styled.a`
   
   &:hover, &.active {
     background-color: #f5f5f5;
-    color: var(--primary-color);
+    color: #3498db;
   }
   
   &.active {
@@ -87,7 +87,7 @@ const ContentArea = styled.div`
 
 const SectionTitle = styled.h2`
   margin-bottom: 20px;
-  color: var(--primary-color);
+  color: #3498db;
 `;
 
 const StatsGrid = styled.div`
@@ -108,7 +108,7 @@ const StatValue = styled.div`
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 5px;
-  color: var(--primary-color);
+  color: #3498db;
 `;
 
 const StatLabel = styled.div`
@@ -194,7 +194,7 @@ const ActionButton = styled.button`
 `;
 
 const AddServiceButton = styled.button`
-  background-color: var(--primary-color);
+  background-color: #3498db;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -207,7 +207,7 @@ const AddServiceButton = styled.button`
   gap: 8px;
   
   &:hover {
-    background-color: #3a7bc8;
+    background-color: #2980b9;
   }
 `;
 
@@ -222,27 +222,36 @@ function ProviderPortalPage() {
     { label: t('provider.reviews'), value: '4.8/5' }
   ];
   
-  const services = [
+  const nearbyServices = [
     {
       id: 1,
-      title: 'Regular House Cleaning',
-      description: 'Weekly or bi-weekly cleaning service for residential homes.',
-      price: '€25/hr',
-      bookings: 12
+      title: 'Home Cleaning',
+      description: '3 Bedroom 2 Living Room Regular Cleaning',
+      price: '€200',
+      distance: '0.5km',
+      status: 'Available',
+      address: '6 Xierqi Middle Road, Haidian District',
+      requestTime: '2024-01-20 14:00'
     },
     {
       id: 2,
-      title: 'Deep Cleaning',
-      description: 'Thorough cleaning service for homes that need extra attention.',
-      price: '€40/hr',
-      bookings: 8
+      title: 'Elder Care',
+      description: 'Post-surgery recovery care, professional caregiver needed',
+      price: '€300/day',
+      distance: '1.2km',
+      status: 'Available',
+      address: 'Huilongguan East Street, Changping District',
+      requestTime: '2024-01-20 15:30'
     },
     {
       id: 3,
-      title: 'Office Cleaning',
-      description: 'Professional cleaning service for office spaces and commercial properties.',
-      price: '€35/hr',
-      bookings: 4
+      title: 'Child Care',
+      description: 'Twin care, experience with twins required',
+      price: '€250/day',
+      distance: '2.0km',
+      status: 'Available',
+      address: 'Shangdi East Road, Haidian District',
+      requestTime: '2024-01-20 16:00'
     }
   ];
   
@@ -268,15 +277,6 @@ function ProviderPortalPage() {
               <MenuLink href="#">{t('provider.schedule')}</MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink href="#">{t('provider.clients')}</MenuLink>
-            </MenuItem>
-            <MenuItem>
-              <MenuLink href="#">{t('provider.reviews')}</MenuLink>
-            </MenuItem>
-            <MenuItem>
-              <MenuLink href="#">{t('provider.earnings')}</MenuLink>
-            </MenuItem>
-            <MenuItem>
               <MenuLink href="#">{t('provider.editProfile')}</MenuLink>
             </MenuItem>
           </SidebarMenu>
@@ -296,25 +296,34 @@ function ProviderPortalPage() {
           
           <ServicesList>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <SectionTitle>{t('provider.services')}</SectionTitle>
-              <AddServiceButton>
-                + {t('provider.addService')}
-              </AddServiceButton>
+              <SectionTitle>{t('provider.nearbyRequests', 'Nearby Service Requests')}</SectionTitle>
             </div>
             
-            {services.map(service => (
+            {nearbyServices.map(service => (
               <ServiceCard key={service.id}>
                 <ServiceInfo>
                   <ServiceTitle>{service.title}</ServiceTitle>
                   <ServiceDescription>{service.description}</ServiceDescription>
                   <ServiceMeta>
                     <span>Price: {service.price}</span>
-                    <span>Bookings: {service.bookings}</span>
+                    <span>Distance: {service.distance}</span>
+                    <span>Address: {service.address}</span>
+                    <span>Posted: {service.requestTime}</span>
+                    <span>Status: {service.status}</span>
                   </ServiceMeta>
                 </ServiceInfo>
                 <ServiceActions>
-                  <ActionButton className="edit">Edit</ActionButton>
-                  <ActionButton className="delete">Delete</ActionButton>
+                  <ActionButton 
+                    className="edit"
+                    onClick={() => {
+                      if(window.confirm('Are you sure you want to accept this request?')) {
+                        // TODO: Call accept request API
+                        alert('Request accepted successfully!');
+                      }
+                    }}
+                  >
+                    Accept
+                  </ActionButton>
                 </ServiceActions>
               </ServiceCard>
             ))}

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import UserTypeSelector from './UserTypeSelector';
 
 const AuthContainer = styled.div`
   max-width: 400px;
@@ -83,57 +84,11 @@ const AuthLink = styled.a`
 
 function Register() {
   const { t } = useTranslation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add registration logic here
-    console.log('Register attempt with:', { email, password, confirmPassword });
-  };
   
   return (
     <AuthContainer>
       <AuthTitle>{t('auth.register')}</AuthTitle>
-      <AuthForm onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label>{t('auth.email')}</Label>
-          <Input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-        </FormGroup>
-        
-        <FormGroup>
-          <Label>{t('auth.password')}</Label>
-          <Input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-        </FormGroup>
-        
-        <FormGroup>
-          <Label>{t('auth.confirmPassword')}</Label>
-          <Input 
-            type="password" 
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
-            required 
-          />
-        </FormGroup>
-        
-        <SubmitButton type="submit">{t('auth.signUp')}</SubmitButton>
-      </AuthForm>
-      
-      <AuthSwitch>
-        {t('auth.haveAccount')}
-        <AuthLink href="/login">{t('auth.signIn')}</AuthLink>
-      </AuthSwitch>
+      <UserTypeSelector />
     </AuthContainer>
   );
 }

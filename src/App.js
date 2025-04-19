@@ -14,10 +14,17 @@ import BookingPage from './pages/BookingPage';
 import ProviderPortalPage from './pages/provider/ProviderPortalPage';
 import ServiceProviderPage from './pages/provider/ServiceProviderPage';
 import ServiceRequestPage from './pages/ServiceRequestPage';
+import ClientDashboardPage from './pages/client/ClientDashboardPage';
 
 // Auth Components
+import UnifiedLogin from './components/auth/UnifiedLogin';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import ClientLoginPage from './pages/auth/ClientLoginPage';
+import ClientRegisterPage from './pages/auth/ClientRegisterPage';
+import ProviderLoginPage from './pages/auth/ProviderLoginPage';
+import ProviderRegisterPage from './pages/auth/ProviderRegisterPage';
+import RegisterPage from './pages/auth/RegisterPage';
 
 // Components
 import Header from './components/layout/Header';
@@ -46,8 +53,13 @@ function App() {
           <Route path="/services/elder-care" element={<ElderCarePage />} />
           <Route path="/services/child-care" element={<ChildCarePage />} />
           <Route path="/booking" element={<BookingPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<UnifiedLogin />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/client/login" element={<ClientLoginPage />} />
+          <Route path="/client/register" element={<ClientRegisterPage />} />
+          <Route path="/provider/login" element={<ProviderLoginPage />} />
+          <Route path="/provider/register" element={<ProviderRegisterPage />} />
+          <Route path="/client/dashboard" element={<ClientDashboardPage />} />
           <Route path="/provider/portal" element={<ProviderPortalPage />} />
           <Route path="/provider/service" element={<ServiceProviderPage />} />
           <Route path="/service-request" element={<ServiceRequestPage />} />

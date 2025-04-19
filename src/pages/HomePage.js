@@ -263,12 +263,14 @@ const HomePage = () => {
           {t('home.hero.subtitle')}
         </HeroDescription>
         <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
-          <HeroButton to="/service-request">{t('home.hero.postRequest')}</HeroButton>
-          <HeroButton to="/provider/service" style={{ background: 'transparent', border: '2px solid white', color: 'white' }}>{t('home.hero.provideService')}</HeroButton>
+          <HeroButton to="/service-request">
+            {t('home.hero.cta')}
+          </HeroButton>
+          
         </div>
       </HeroSection>
       
-      <SectionTitle>Our Services</SectionTitle>
+      <SectionTitle>{t('home.services.title', 'Our Services')}</SectionTitle>
       <ServiceNavigation>
         {serviceCategories.map(category => (
           <ServiceNavItem key={category.id} to={category.path}>
@@ -278,7 +280,7 @@ const HomePage = () => {
         ))}
       </ServiceNavigation>
       
-      <SectionTitle>Popular Services</SectionTitle>
+      <SectionTitle>{t('home.popular.title', 'Popular Services')}</SectionTitle>
       <ServiceGrid>
         {popularServices.map(service => (
           <ServiceCard key={service.id}>
@@ -293,13 +295,13 @@ const HomePage = () => {
                   ★ {service.rating} ({service.providers} providers)
                 </ServiceCardRating>
               </ServiceCardInfo>
-              <ServiceCardButton to={`/booking?service=${service.id}`}>Quick Book</ServiceCardButton>
+              <ServiceCardButton to={`/booking?service=${service.id}`}>{t('home.services.quickBook', 'Quick Book')}</ServiceCardButton>
             </ServiceCardContent>
           </ServiceCard>
         ))}
       </ServiceGrid>
       
-      <SectionTitle>What Our Customers Say</SectionTitle>
+      <SectionTitle>{t('home.testimonials.title', 'What Our Customers Say')}</SectionTitle>
       <TestimonialSection>
         <TestimonialGrid>
           {testimonials.map(testimonial => (
