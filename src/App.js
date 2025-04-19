@@ -15,6 +15,7 @@ import ProviderPortalPage from './pages/provider/ProviderPortalPage';
 import ServiceProviderPage from './pages/provider/ServiceProviderPage';
 import ServiceRequestPage from './pages/ServiceRequestPage';
 import ClientDashboardPage from './pages/client/ClientDashboardPage';
+import ProviderProfilePage from './pages/provider/ProviderProfilePage';
 
 // Auth Components
 import UnifiedLogin from './components/auth/UnifiedLogin';
@@ -60,6 +61,10 @@ function App() {
           <Route path="/client/dashboard" element={<ClientDashboardPage />} />
           <Route path="/provider/portal" element={<ProviderPortalPage />} />
           <Route path="/provider/service" element={<ServiceProviderPage />} />
+          <Route path="/provider/services" element={<ProviderPortalPage />} />
+          <Route path="/provider/schedule" element={<ProviderPortalPage />} />
+          <Route path="/provider/profile" element={<ProviderPortalPage />} />
+          <Route path="/provider/profile/:id" element={<ProviderProfilePage />} />
           <Route path="/service-request" element={<ServiceRequestPage />} />
         </Routes>
       </MainContent>

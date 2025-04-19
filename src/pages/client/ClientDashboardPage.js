@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -146,6 +146,9 @@ const ServiceIcon = styled.div`
 
 const ServiceInfo = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ServiceTitle = styled.div`
@@ -159,8 +162,46 @@ const ServiceStatus = styled.div`
     props.status === 'scheduled' ? 'orange' : 'var(--text-secondary)'};
 `;
 
+const CancelButton = styled.button`
+  padding: 6px 12px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #d32f2f;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
 function ClientDashboardPage() {
   const { t } = useTranslation();
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [cancelReason, setCancelReason] = useState('');
+
+  const handleCancelClick = (service) => {
+    setSelectedService(service);
+    setShowCancelModal(true);
+  };
+
+  const handleConfirmCancel = async () => {
+    if (selectedService && cancelReason) {
+      // TODO: 调用API取消服务
+      console.log('取消服务:', selectedService, '原因:', cancelReason);
+      setShowCancelModal(false);
+      setCancelReason('');
+      setSelectedService(null);
+    }
+  };
   
   return (
     <PageContainer>
@@ -217,29 +258,136 @@ function ClientDashboardPage() {
             <ServiceCard>
               <ServiceIcon>🧹</ServiceIcon>
               <ServiceInfo>
-                <ServiceTitle>{t('services.cleaning')}</ServiceTitle>
-                <ServiceStatus status="scheduled">{t('client.scheduled')}: 2023-06-15</ServiceStatus>
+                <div>
+                  <ServiceTitle>{t('services.cleaning')}</ServiceTitle>
+                  <ServiceStatus status="scheduled">{t('client.scheduled')}: 2023-06-15</ServiceStatus>
+                </div>
+                <CancelButton
+                  onClick={() => handleCancelClick({
+                    type: 'cleaning',
+                    date: '2023-06-15'
+                  })}
+                >
+                  {t('Cancel')}
+                </CancelButton>
               </ServiceInfo>
             </ServiceCard>
             
             <ServiceCard>
               <ServiceIcon>🔧</ServiceIcon>
               <ServiceInfo>
-                <ServiceTitle>{t('services.repair')}</ServiceTitle>
-                <ServiceStatus status="completed">{t('client.completed')}: 2023-06-10</ServiceStatus>
+                <div>
+                  <ServiceTitle>{t('services.repair')}</ServiceTitle>
+                  <ServiceStatus status="completed">{t('client.completed')}: 2023-06-10</ServiceStatus>
+                </div>
+                <CancelButton
+                  onClick={() => handleCancelClick({
+                    type: 'repair',
+                    date: '2023-06-10'
+                  })}
+                  disabled={true}
+                >
+                  {t('Cancel')}
+                </CancelButton>
               </ServiceInfo>
             </ServiceCard>
             
             <ServiceCard>
               <ServiceIcon>👵</ServiceIcon>
               <ServiceInfo>
-                <ServiceTitle>{t('services.elderCare')}</ServiceTitle>
-                <ServiceStatus status="pending">{t('client.pending')}</ServiceStatus>
+                <div>
+                  <ServiceTitle>{t('services.elderCare')}</ServiceTitle>
+                  <ServiceStatus status="pending">{t('client.pending')}</ServiceStatus>
+                </div>
+                <CancelButton
+                  onClick={() => handleCancelClick({
+                    type: 'elderCare',
+                    status: 'pending'
+                  })}
+                  disabled={false}
+                >
+                  {t('Cancel')}
+                </CancelButton>
               </ServiceInfo>
             </ServiceCard>
           </ServicesList>
         </ContentArea>
       </DashboardContainer>
+      {showCancelModal && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '20px',
+              borderRadius: '8px',
+              width: '400px'
+            }}
+          >
+            <h3 style={{ marginBottom: '20px' }}>{t('Client Cancel Service')}</h3>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px' }}>
+                {t('Reason')}:
+              </label>
+              <textarea
+                value={cancelReason}
+                onChange={(e) => setCancelReason(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  border: '1px solid #ddd',
+                  minHeight: '100px'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+              <button
+                onClick={() => {
+                  setShowCancelModal(false);
+                  setCancelReason('');
+                  setSelectedService(null);
+                }}
+                style={{
+                  padding: '8px 16px',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  backgroundColor: 'white',
+                  cursor: 'pointer'
+                }}
+              >
+                {t('Cancel')}
+              </button>
+              <button
+                onClick={handleConfirmCancel}
+                disabled={!cancelReason}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: cancelReason ? '#f44336' : '#ccc',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: cancelReason ? 'pointer' : 'not-allowed'
+                }}
+              >
+                {t('Confirm')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </PageContainer>
   );
 }

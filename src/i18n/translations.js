@@ -1,22 +1,22 @@
-// 多语言翻译配置文件
+// Multi-language translation configuration file
 
 export const translations = {
   en: {
-    // 图片上传组件
+    // Image uploader component
     imageUploader: {
       uploadImage: "Upload Image",
       uploadText: "Click or drag images here to upload (max {maxImages})",
       maxImagesError: "You can only upload a maximum of {maxImages} images",
       previewAlt: "Preview image {index}"
     },
-    // 服务请求
+    // Service request
     serviceRequest: {
       title: "Request a Service",
       description: "Choose the type of service you need and we'll connect you with the right professional",
       serviceType: "Service Type",
       selectType: "Select a service type"
     },
-    // 注册流程
+    // Registration process
     registration: {
       steps: {
         userType: "Select User Type",
@@ -48,7 +48,7 @@ export const translations = {
       city: "City",
       zipCode: "ZIP Code"
     },
-    // 导航
+    // Navigation
     nav: {
       home: 'Home',
       cleaning: 'Cleaning',
@@ -61,7 +61,7 @@ export const translations = {
       register: 'Register',
       providerPortal: 'Provider Portal',
     },
-    // 首页
+    // Home page
     home: {
       hero: {
         title: 'Your Trusted Service Platform',
@@ -71,7 +71,7 @@ export const translations = {
         provideService: 'Provide Service'
       },
     },
-    // 认证
+    // Authentication
     auth: {
       login: 'Login',
       register: 'Register',
@@ -98,7 +98,7 @@ export const translations = {
       clientTypeDesc: 'Looking for services for your home or personal needs',
       providerTypeDesc: 'Offer your professional services on our platform',
     },
-    // 服务提供商
+    // Service provider
     provider: {
       portal: 'Provider Portal',
       dashboard: 'Dashboard',
@@ -110,7 +110,7 @@ export const translations = {
       addService: 'Add Service',
       editProfile: 'Edit Profile',
     },
-    // 客户
+    // Client
     client: {
       dashboard: 'Dashboard',
       dashboardDesc: 'Manage your service requests and bookings',

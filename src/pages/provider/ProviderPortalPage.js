@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const PageContainer = styled.div`
   max-width: 1200px;
@@ -60,7 +61,7 @@ const MenuItem = styled.li`
   }
 `;
 
-const MenuLink = styled.a`
+const MenuLink = styled(Link)`
   display: block;
   padding: 10px 15px;
   color: var(--text-primary);
@@ -169,7 +170,9 @@ const ServiceActions = styled.div`
 const ActionButton = styled.button`
   padding: 8px 12px;
   border: none;
-
+  display: flex;
+  align-items: center;
+  gap: 8px;
   
   &.edit {
     background-color: #f0f0f0;
@@ -188,13 +191,6 @@ const ActionButton = styled.button`
       background-color: #ffe0e0;
     }
   }
-`;
-
-
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
   
   &:hover {
     background-color: #2980b9;
@@ -258,16 +254,16 @@ function ProviderPortalPage() {
         <Sidebar>
           <SidebarMenu>
             <MenuItem>
-              <MenuLink href="#" className="active">{t('provider.dashboard')}</MenuLink>
+              <MenuLink to="/provider/dashboard" className="active">{t('provider.dashboard')}</MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink href="#">{t('provider.services')}</MenuLink>
+              <MenuLink to="/provider/services">{t('provider.services')}</MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink href="#">{t('provider.schedule')}</MenuLink>
+              <MenuLink to="/provider/schedule">{t('provider.schedule')}</MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink href="#">{t('provider.editProfile')}</MenuLink>
+              <MenuLink to="/provider/profile">{t('provider.editProfile')}</MenuLink>
             </MenuItem>
           </SidebarMenu>
         </Sidebar>

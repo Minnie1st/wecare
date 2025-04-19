@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import ProviderCard from '../components/ProviderCard';
 
 const PageContainer = styled.div`
   max-width: 1200px;
@@ -222,6 +223,33 @@ const AuthorRole = styled.div`
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const featuredProviders = [
+    {
+      id: 1,
+      name: 'Mari Tamm',
+      image: 'https://randomuser.me/api/portraits/women/68.jpg',
+      serviceType: 'Elder Care',
+      rating: 4.9,
+      completedJobs: 128
+    },
+    {
+      id: 2,
+      name: 'Liisa Kask',
+      image: 'https://randomuser.me/api/portraits/women/45.jpg',
+      serviceType: 'Child Care',
+      rating: 4.8,
+      completedJobs: 96
+    },
+    {
+      id: 3,
+      name: 'Andres Saar',
+      image: 'https://randomuser.me/api/portraits/men/32.jpg',
+      serviceType: 'Home Repair',
+      rating: 4.9,
+      completedJobs: 156
+    }
+  ];
+
   const serviceCategories = [
     { id: 'cleaning', name: 'Cleaning', icon: '🧹', color: 'var(--cleaning-color)', path: '/services/cleaning' },
     { id: 'repair', name: 'Repair', icon: '🔧', color: 'var(--repair-color)', path: '/services/repair' },
@@ -270,6 +298,13 @@ const HomePage = () => {
         </div>
       </HeroSection>
       
+      <SectionTitle>{t('home.featured.title', 'Featured Service Providers')}</SectionTitle>
+      <ServiceGrid>
+        {featuredProviders.map(provider => (
+          <ProviderCard key={provider.id} provider={provider} />
+        ))}
+      </ServiceGrid>
+
       <SectionTitle>{t('home.services.title', 'Our Services')}</SectionTitle>
       <ServiceNavigation>
         {serviceCategories.map(category => (
