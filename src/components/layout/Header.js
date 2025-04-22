@@ -106,7 +106,7 @@ function Header() {
           <NavLink to="/services/plumbing">{t('nav.plumbing')}</NavLink>
           <NavLink to="/services/elder-care">{t('nav.elderCare')}</NavLink>
           <NavLink to="/services/child-care">{t('nav.childCare')}</NavLink>
-          <NavLink to="/booking">{t('nav.bookNow')}</NavLink>
+  
           <LanguageSwitcher />
           <AuthButtons>
             <div style={{ marginRight: '10px', position: 'relative' }}>

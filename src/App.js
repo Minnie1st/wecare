@@ -16,6 +16,7 @@ import ServiceProviderPage from './pages/provider/ServiceProviderPage';
 import ServiceRequestPage from './pages/ServiceRequestPage';
 import ClientDashboardPage from './pages/client/ClientDashboardPage';
 import ProviderProfilePage from './pages/provider/ProviderProfilePage';
+import PaymentPage from './pages/PaymentPage';
 
 // Auth Components
 import UnifiedLogin from './components/auth/UnifiedLogin';
@@ -24,6 +25,7 @@ import ClientLoginPage from './pages/auth/ClientLoginPage';
 import ClientRegisterPage from './pages/auth/ClientRegisterPage';
 import ProviderLoginPage from './pages/auth/ProviderLoginPage';
 import ProviderRegisterPage from './pages/auth/ProviderRegisterPage';
+import RegistrationSuccessPage from './pages/auth/RegistrationSuccessPage';
 
 // Components
 import Header from './components/layout/Header';
@@ -56,8 +58,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/client/login" element={<ClientLoginPage />} />
           <Route path="/client/register" element={<ClientRegisterPage />} />
+          <Route path="/client/register-success" element={<RegistrationSuccessPage />} />
           <Route path="/provider/login" element={<ProviderLoginPage />} />
           <Route path="/provider/register" element={<ProviderRegisterPage />} />
+          <Route path="/provider/register-success" element={<RegistrationSuccessPage />} />
           <Route path="/client/dashboard" element={<ClientDashboardPage />} />
           <Route path="/provider/portal" element={<ProviderPortalPage />} />
           <Route path="/provider/service" element={<ServiceProviderPage />} />
@@ -66,6 +70,7 @@ function App() {
           <Route path="/provider/profile" element={<ProviderPortalPage />} />
           <Route path="/provider/profile/:id" element={<ProviderProfilePage />} />
           <Route path="/service-request" element={<ServiceRequestPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </MainContent>
       <Footer />

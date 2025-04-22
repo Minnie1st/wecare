@@ -284,17 +284,17 @@ function ProviderRegisterPage() {
     return (
       <AuthForm>
         <ReviewMessage>
-          <h3>感谢您提交申请</h3>
+          <h3>{t('registration.thankYou', { defaultValue: 'Thank You for Your Application' })}</h3>
           <p>{t('registration.reviewMessage')}</p>
         </ReviewMessage>
         
         <FormGroup>
-          <Label>申请状态</Label>
-          <p>审核中</p>
+          <Label>{t('registration.applicationStatus', { defaultValue: 'Application Status' })}</Label>
+          <p>{t('registration.underReview', { defaultValue: 'Under Review' })}</p>
         </FormGroup>
         
         <FormGroup>
-          <Label>提交时间</Label>
+          <Label>{t('registration.submissionTime', { defaultValue: 'Submission Time' })}</Label>
           <p>{new Date().toLocaleString()}</p>
         </FormGroup>
       </AuthForm>
@@ -303,7 +303,7 @@ function ProviderRegisterPage() {
   
   // 服务设置步骤
   const ServiceSetupStep = (formData, updateFormData) => {
-    const [selectedTimeSlots, setSelectedTimeSlots] = useState(formData.timeSlots || {});
+    const selectedTimeSlots = formData.timeSlots || {};
     
     const toggleTimeSlot = (day, time) => {
       const newTimeSlots = { ...selectedTimeSlots };
@@ -315,12 +315,51 @@ function ProviderRegisterPage() {
         newTimeSlots[key] = true;
       }
       
-      setSelectedTimeSlots(newTimeSlots);
       updateFormData({ timeSlots: newTimeSlots });
     };
     
-    const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-    const times = ['上午', '下午', '晚上'];
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const times = ['Morning', 'Afternoon', 'Evening'];
+
+    const TimeSlotContainer = styled.div`
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px;
+      max-width: 100%;
+      &::-webkit-scrollbar {
+        height: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+      }
+    `;
+
+    const DayColumn = styled.div`
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 100px;
+    `;
+
+    const TimeSlot = styled.div`
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: ${props => props.selected ? '#4CAF50' : '#fff'};
+      color: ${props => props.selected ? '#fff' : '#333'};
+      &:hover {
+        background-color: ${props => props.selected ? '#45a049' : '#f5f5f5'};
+      }
+    `;
     
     return (
       <AuthForm>
@@ -331,12 +370,12 @@ function ProviderRegisterPage() {
             onChange={(e) => updateFormData({ serviceCategory: e.target.value })} 
             required
           >
-            <option value="">请选择服务类别</option>
-            <option value="cleaning">清洁服务</option>
-            <option value="repair">维修服务</option>
-            <option value="plumbing">水暖服务</option>
-            <option value="elderCare">老人护理</option>
-            <option value="childCare">儿童护理</option>
+            <option value="">{t('registration.selectServiceCategory', { defaultValue: 'Please select service category' })}</option>
+            <option value="cleaning">{t('services.cleaning', { defaultValue: 'Cleaning Service' })}</option>
+            <option value="repair">{t('services.repair', { defaultValue: 'Repair Service' })}</option>
+            <option value="plumbing">{t('services.plumbing', { defaultValue: 'Plumbing Service' })}</option>
+            <option value="elderCare">{t('services.elderCare', { defaultValue: 'Elder Care' })}</option>
+            <option value="childCare">{t('services.childCare', { defaultValue: 'Child Care' })}</option>
           </ServiceCategorySelect>
         </FormGroup>
         
@@ -345,7 +384,7 @@ function ProviderRegisterPage() {
           <Input 
             type="number" 
             min="0" 
-            placeholder="每小时价格 (元)" 
+            placeholder={t('registration.hourlyRate', { defaultValue: 'Hourly rate (€)' })} 
             value={formData.hourlyRate || ''} 
             onChange={(e) => updateFormData({ hourlyRate: e.target.value })} 
             required 
@@ -391,7 +430,7 @@ function ProviderRegisterPage() {
     {
       label: t('registration.steps.documents'),
       content: DocumentsStep,
-      isValid: (data) => data.idProof && data.certificates && data.experienceProof && data.experience
+      isValid: (data) => data.experience
     },
     {
       label: t('registration.steps.review'),
@@ -408,8 +447,8 @@ function ProviderRegisterPage() {
   
   const handleComplete = (formData) => {
     console.log('Provider registration complete with:', formData);
-    // 这里可以添加注册成功后的逻辑，比如跳转到登录页面或服务提供商仪表板
-    navigate('/provider/login');
+    // 注册成功后跳转到注册成功页面
+    navigate('/provider/register-success');
   };
   
   return (

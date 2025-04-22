@@ -207,8 +207,8 @@ function ClientRegisterPage() {
   
   const handleComplete = (formData) => {
     console.log('Client registration complete with:', formData);
-    // 这里可以添加注册成功后的逻辑，比如跳转到登录页面或客户仪表板
-    navigate('/client/login');
+    // 注册成功后跳转到注册成功页面
+    navigate('/client/register-success');
   };
   
   return (

@@ -80,12 +80,12 @@ const RemoveButton = styled.button`
   }
 `;
 
-function ImageUploader({ onChange, maxImages = 5, label }) {
+function ImageUploader({ onChange, maxImages = 5, label, required = false }) {
   const { t } = useTranslation();
   const [images, setImages] = useState([]);
   
   // 如果没有提供label，则使用默认的翻译
-  const imageLabel = label || t('imageUploader.uploadImage');
+  const imageLabel = label || t('imageUploader.uploadImage') + (required ? ' *' : '');
   
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -119,10 +119,14 @@ function ImageUploader({ onChange, maxImages = 5, label }) {
     }
   };
   
+  const handleAreaClick = () => {
+    document.getElementById('image-upload').click();
+  };
+  
   return (
     <UploaderContainer>
       <UploadLabel>{imageLabel}</UploadLabel>
-      <UploadArea>
+      <UploadArea onClick={handleAreaClick}>
         <UploadInput 
           type="file" 
           id="image-upload" 

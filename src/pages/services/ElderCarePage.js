@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PageContainer = styled.div`
@@ -456,6 +457,7 @@ const BookButton = styled.button`
 `;
 
 function ElderCarePage() {
+  const navigate = useNavigate();
   const [selectedDays, setSelectedDays] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   
@@ -750,7 +752,7 @@ function ElderCarePage() {
               <span>Total:</span>
               <span>€120</span>
             </TotalPrice>
-            <BookButton>Book Care Service</BookButton>
+            <BookButton onClick={() => navigate('/payment')}>Book Care Service</BookButton>
           </ServiceSummary>
         </Sidebar>
       </ContentContainer>

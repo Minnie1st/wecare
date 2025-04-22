@@ -46,7 +46,20 @@ export const translations = {
       phoneNumber: "Phone Number",
       address: "Address",
       city: "City",
-      zipCode: "ZIP Code"
+      zipCode: "ZIP Code",
+      success: {
+        title: "Registration Successful",
+        providerMessage: "Your service provider account has been successfully registered. You can now log in and start setting up your services.",
+        clientMessage: "Your client account has been successfully registered. You can now log in and start using our services.",
+        login: "Log In Now",
+        home: "Return to Home"
+      },
+      thankYou: "Thank You for Your Application",
+      applicationStatus: "Application Status",
+      underReview: "Under Review",
+      submissionTime: "Submission Time",
+      selectServiceCategory: "Please select service category",
+      hourlyRate: "Hourly rate (USD)"
     },
     // Navigation
     nav: {

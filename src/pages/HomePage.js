@@ -330,7 +330,7 @@ const HomePage = () => {
                   ★ {service.rating} ({service.providers} providers)
                 </ServiceCardRating>
               </ServiceCardInfo>
-              <ServiceCardButton to={`/booking?service=${service.id}`}>{t('home.services.quickBook', 'Quick Book')}</ServiceCardButton>
+              <ServiceCardButton to={`/booking?service=${service.id}`}>{t('home.services.bookService', 'Book a Service')}</ServiceCardButton>
             </ServiceCardContent>
           </ServiceCard>
         ))}
